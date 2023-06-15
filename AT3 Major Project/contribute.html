@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ENVI.AU</title>
+    <link rel="shortcut icon" href="styles/images/logo/logo.png">
+    <link rel="stylesheet" href="styles/contribute.css">
+</head>
+<body>
+    <!--Settings-->
+    <div id="overlay">
+        <div id="settings">
+          <h2 id="close">Close</h2>
+          <h1>Settings</h1>
+          <div>
+            <p style="margin-right: 2.8vw;">Change Username</p>
+            <form id="setting-username-form">
+              <input for = "username" id = "setting-username-input" type="text" maxlength = "15" placeholder = "Your new username" required> <!--The user must enter a username-->
+              <input type="submit" value="Submit">
+            </form>
+          </div>
+          <div>
+          <form id = "setting-state-form" required>
+          <p style="margin-right: 5.15vw;">Change State</p>
+            <select name="states" id="setting-state-input">
+              <option value="Australian Capital Territory">Australian Capital Territory</option>
+              <option value="New South Wales">New South Wales</option>
+              <option value="Northern Territory">Northern Territory</option>
+              <option value="Queensland">Queensland</option>
+              <option value="Southern Australia">Southern Australia</option>
+              <option value="Tasmania">Tasmania</option>
+              <option value="Victoria">Victoria</option>
+              <option value="Western Australia">Western Australia</option>
+            </select>
+            <input type="submit" value="Submit">
+          </form>
+          </div>
+        <div>
+          <form id = "setting-city-form">
+            <p style="margin-right: 7.8vw;">Change City</p>
+            <input for = "username" id = "setting-city-input" type="text" placeholder = "Your city" required> <!--The user must enter a username-->
+            <input type="submit" value="Submit">
+          </form>
+        </div>
+        <div>
+          <form id = "setting-emission-form">
+            <p style="margin-right: 6vw;">Recalculate Emissions</p>
+            <input for = "username" id = "setting-emission-input" type="text" placeholder = "Your annual co2 emissions (tonnes)" required> <!--The user must enter a username-->
+            <input type="submit" value="Submit">
+          </form>
+        </div>
+        <div>
+          <p style="margin-right: 6.8vw;">!!Danger!!</p>
+          <button id="setting-reset">Reset ALL data</button>
+        </div>
+    </div>
+</div>
+        
+    <!--Navigation Bar-->
+    <nav class="lightmode">
+        <a href=index.html><img id="logo" src="styles/images/logo/logosmall.png"></a>
+        <p id="navmsg"></p>
+        <ul>
+            <li><a href=dashboard.html>Dashboard</a></li>
+            <li ><a style="background-color: #639f60;" href=contribute.html>Contribute</a></li>
+            <li><a href=furtherreading.html>Further Reading</a></li>
+        </ul>
+        <a href=#><img src="styles/images/widgets/settings.png"></a>
+    </nav>
+    <p id="welcome" style="background-color: #263d25; padding: 0.5vw;">Looking to offset your emissions or support a charity? Your contribution could a long way.</p>
+    <!--Offset Emissions|Support a charity|Volunteer, flexbox columns of 3-->
+    <div id="box">
+        <div id="offset">
+            <p id="offsetText">Emissions</p>
+            <p style="font-size:1vw;">Remember: offsetting is more than carbon. Other benefits arise from supporting such projects, <br>like enhanced biodiversity, habitat protection, creating employment opportunities, and many more.</p>
+            <p>Below are just some Australian carbon offset options.</p>
+            <a target="_blank" href="https://www.greenfleet.com.au/">Greenfleet</a>
+            <a target="_blank" href="https://www.greeningaustralia.org.au/donate-to-reduce-your-impact/">Greening Australia</a>
+            <a target="_blank" href="https://carbonoffsets.online/offset-your-emissions/">Carbon Offsets Australia</a>
+            <a target="_blank" href="https://carbonpositiveaustralia.org.au/donate/">Carbon Positive Australia</a>
+        </div>
+        <div id="charity">
+            <p>Charities & Volunteering Opportunities</p>
+            <p style="font-size:1vw;">If you prefer to support a more specific cause, below are a few environmental charities, <br> amongst the many in Australia.</p>
+            <a target="_blank" href="https://www.acf.org.au/">Australian Conservation Foundation</a>
+            <a target="_blank" href="https://www.marineconservation.org.au/">Australian Marine Conservation Society</a>
+            <a target="_blank" href="https://www.cleanup.org.au/">Clean Up Australia</a>
+            <a target="_blank" href="https://www.worldwildlife.org/">WWF</a>
+            <a target="_blank" href="https://www.bushheritage.org.au/">Bush Heritage Australia</a>
+            <a target="_blank" href="https://www.wilderness.org.au/">Wilderness Society</a>
+        </div>
+    </div>
+</body>
+<script src="contribute.js"></script>
+</html>

@@ -1,0 +1,121 @@
+/*Variables*/
+$lightmode: #f1f1f1;
+$darkmode: #1c1c1c;
+$shading: #b5b5b5;
+$maingreen: #639f60;
+$darkergreen: #487545;
+$darkergreenshade: #375935;
+$evendarkergreen: #263d25;
+/*Fonts*/
+@import url("https://fonts.googleapis.com/css?family=Lexend");
+@import url("https://fonts.googleapis.com/css?family=Open+Sans");
+body {
+    margin: 0;
+    font-family: "Open Sans";
+    height: 100%;
+    background-size: cover;
+    background-color: $maingreen;
+    background-repeat: none;
+    color: $lightmode;
+}
+#navmsg {
+    color: $darkergreen;
+}
+#welcome {
+    text-align: center;
+    padding-top: 2vw;
+}
+#content {
+    display: flex;
+    justify-content: space-around;
+}
+#news {
+    display: flex;
+    flex-direction: column;
+    background-color: $darkergreen;
+    border-radius: 5px;
+    padding: 1vw;
+    text-align: center;
+    a {
+        background-color: $lightmode;
+        border-radius: 3px;
+        padding: 0.5vw;
+        margin: 0.5vw;
+        color: $evendarkergreen;
+    }
+}
+#gov {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: $darkergreen;
+    border-radius: 5px;
+    padding: 1vw;
+    text-align: center;
+    a {
+        background-color: $lightmode;
+        border-radius: 3px;
+        padding: 0.5vw;
+        margin: 0.5vw;
+        color: $evendarkergreen;
+    }
+}
+#blogs {
+    display: flex;
+    flex-direction: column;
+    background-color: $darkergreen;
+    border-radius: 5px;
+    padding: 1vw;
+    text-align: center;
+    a {
+        background-color: $lightmode;
+        border-radius: 3px;
+        padding: 0.5vw;
+        margin: 0.5vw;
+        color: $evendarkergreen;
+    }
+}
+.centerflex {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.lightmode {
+    background-color: $lightmode;
+    color: $darkmode;
+}
+.darkmode {
+    background-color: $darkmode;
+    color: $lightmode;
+}
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    overflow: hidden;
+    padding-left: 2%;
+    padding-right: 2%;
+    padding-top: 0.8%;
+    padding-bottom: 0.8%;
+    box-sizing: border-box;
+    width: 100%;
+    top: 0;
+    font-size: 1.25vw;
+    ul {
+        list-style-type: none;
+        li {
+            display: inline;
+            a {
+                text-decoration: none;
+                color: $darkmode;
+                padding: 1vw;
+                &:hover {
+                    background-color: $shading;
+                }
+                &:active {
+                    background-color: $maingreen;
+                }
+            }
+        }
+    }
+}

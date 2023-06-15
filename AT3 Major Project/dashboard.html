@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ENVI.AU</title>
+    <link rel="shortcut icon" href="styles/images/logo/logo.png">
+    <link rel="stylesheet" href="styles/dashboard.css">
+</head>
+<body>
+    <!--Navigation Bar-->
+    <nav class="lightmode">
+        <a href=index.html><img id="logo" src="styles/images/logo/logosmall.png"></a>
+        <p id="navmsg"></p>
+        <ul>
+            <li><a style="background-color: #639f60;" href=dashboard.html>Dashboard</a></li>
+            <li><a href=contribute.html>Contribute</a></li>
+            <li><a href=furtherreading.html>Further Reading</a></li>
+        </ul>
+        <a href=#><img src="styles/images/widgets/settings.png"></a>
+    </nav>
+    <p id="welcome"></p>
+    <div id="dashbox">
+        <div id="left">
+            <div id="tasks">
+                <p id="totalpoints">Total points: </p>
+                <div class="taskref">
+                    <p id="level0">Level0</p>
+                    <div>
+                    <span id="level0c" class="taskbuttons">Complete</span>
+                    <span id="level0s" class="taskbuttons">Skip</span>
+                    </div>
+                </div>
+                <div class="taskref">
+                    <p id="level1">Level1</p>
+                    <div>
+                    <span id="level1c" class="taskbuttons">Complete</span>
+                    <span id="level1s" class="taskbuttons">Skip</span>
+                    </div>
+                </div>
+                <div class="taskref">
+                    <p  id="level2">Level2</p>
+                    <div>
+                    <span id="level2c" class="taskbuttons">Complete</span>
+                    <span id="level2s" class="taskbuttons">Skip</span>
+                    </div>
+                </div>
+                <div class="taskref">
+                    <p id="level3">Level3</p>
+                    <div>
+                    <span id="level3c" class="taskbuttons">Complete</span>
+                    <span id="level3s" class="taskbuttons">Skip</span>
+                    </div>
+                </div>
+            </div>
+            <br>
+            <a href="furtherreading.html">Want more to read? →</a>
+        </div>
+        <div id="right">
+            <p id="weatheremission">Weather & Emissions</p>
+            <p id="weather"></p>
+            <form class="hidden" id = "location-form">
+                <input for = "username" id = "location-input" type="text" placeholder = "Your city" required> <!--The user must enter a username-->
+                <input type="submit" value="Submit">
+            </form>
+            <p id ="airquality"></p>
+            <p id="predicted"></p>
+            <a href="contribute.html">Offset your emissions here→</a>
+        </div>
+    </div>
+    <!--Footer-->
+</body>
+<script src="dashboard.js"></script>
+</html>

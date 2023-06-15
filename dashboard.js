@@ -140,6 +140,11 @@ async function weatherCall(city) {
     return jsonData;
     
 };
+
+async function showWeather() {
+
+}
+
 function dashboardSequence() {
     document.getElementById("totalpoints").innerText = `Total points: ${localStorage.getItem("points")}`
     document.getElementById("welcome").innerText = `Welcome back, ${localStorage.getItem("username")}! Earn points by completing daily tasks and help lessen your impact on the environment!`
@@ -153,6 +158,7 @@ function dashboardSequence() {
     for (let i=0;i<count.length;i++) {
         newTask.push(displayNewTask(i))
     }
+
     //FLAGGING
     //console.log(countTasks(),initialiseTasks(),extractTaskStore())
 
@@ -181,10 +187,11 @@ function dashboardSequence() {
     const airqText = document.getElementById("airquality")
     let storedLocation = localStorage.getItem("location").split(',')
     let emissions = localStorage.getItem("emissions").split(',')
+
     if (emissions[0] == '') { //if not estimated
         document.getElementById("predicted").innerText = `Your annual CO2 emissions are ${emissions[1]}`
     } else { //if estimated
-        document.getElementById("predicted").innerText = `Your predicted annual CO2 emissions are ${emissions[0]} tonnes.`
+        document.getElementById("predicted").innerText = `Your estimated annual CO2 emissions are ${emissions[0]} tonnes.`
 
     }
     const airqIndex = {
@@ -197,27 +204,39 @@ function dashboardSequence() {
     }
     if (storedLocation.length == 1) { //if there is no city inputted
         locationForm.style.display = "inline"
-
         locationForm.addEventListener("submit", (e) => {
-            console.log("uh")
-            e.preventDefault
+            e.preventDefault()
             let city = locationInput.value;
-            if (storedLocation.length == 1) {
-                storedLocation.push(city)
-            } else {
-                storedLocation[1] = city
-            }
-            localStorage.setItem("location",storedLocation)
-            })
-        }
         (async () => {
-            let calledWeather = await weatherCall(storedLocation[1]) //[temperature (celsius), air quality]
-            weatherText.innerText = `Temperature: ${calledWeather.current.temp_c}°C | Humidity: ${calledWeather.current.humidity}% | Condition: ${calledWeather.current.condition["text"]}`
-            airqText.innerText = `Air quality: ${airqIndex[Number(calledWeather.current.air_quality["us-epa-index"])]} | Location: ${storedLocation[1]}`
-            locationForm.style.display = "none"
+            let calledWeather = await weatherCall(city) //[temperature (celsius), air quality]
+            if (calledWeather.length == 1) {
+                weatherText.innerText = calledWeather[0]
+            } else {
+                storedLocation.push(city)
+                localStorage.setItem("location",storedLocation)
+                weatherText.innerText = `Temperature: ${calledWeather.current.temp_c}°C | Humidity: ${calledWeather.current.humidity}% | Condition: ${calledWeather.current.condition["text"]}`
+                airqText.innerText = `Air quality: ${airqIndex[Number(calledWeather.current.air_quality["us-epa-index"])]} | Location: ${storedLocation[1]}`
+                locationForm.style.display = "none"
+            }
+            
         })()
 
+    }) 
+    }   else if (storedLocation.length == 2) {
+            (async () => {
+                let calledWeather = await weatherCall(storedLocation[1]) //[temperature (celsius), air quality]
+                if (calledWeather.length == 1) {
+                    weatherText.innerText = calledWeather[0]
+                } else {
+                    weatherText.innerText = `Temperature: ${calledWeather.current.temp_c}°C | Humidity: ${calledWeather.current.humidity}% | Condition: ${calledWeather.current.condition["text"]}`
+                    airqText.innerText = `Air quality: ${airqIndex[Number(calledWeather.current.air_quality["us-epa-index"])]} | Location: ${storedLocation[1]}`
+                    locationForm.style.display = "none"
+                }
+                
+            })()
+    }
 }
+
     //STATS?? total points, how many 
     //Weather API = add a form that makes person enter their own state, catch any errors and notify them that they spelled the state wrong
 
@@ -230,7 +249,7 @@ const overlay = document.getElementById("overlay")
 const close = document.getElementById("close")
 
 //setting if player is not returning change the settings so that it says "please make a user profile first on the home page"
-settings.addEventListener("click", ()=> {
+    settings.addEventListener("click", ()=> {
         overlay.style.display = "flex";
         document.getElementById("setting-username-form").addEventListener("submit", (e) => {
             e.preventDefault()

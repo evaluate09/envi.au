@@ -10,7 +10,7 @@
 <body>
     <!--Settings-->
     <div id="overlay">
-        <div id="settings">
+        <div class="settings">
           <h2 id="close">Close</h2>
           <h1>Settings</h1>
           <div>
@@ -20,7 +20,7 @@
               <input type="submit" value="Submit">
             </form>
           </div>
-          <div>
+        <div>
           <form id = "setting-state-form" required>
           <p style="margin-right: 5.15vw;">Change State</p>
             <select name="states" id="setting-state-input">
@@ -35,7 +35,7 @@
             </select>
             <input type="submit" value="Submit">
           </form>
-          </div>
+        </div>
         <div>
           <form id = "setting-city-form">
             <p style="margin-right: 7.8vw;">Change City</p>
@@ -54,20 +54,19 @@
           <p style="margin-right: 6.8vw;">!!Danger!!</p>
           <button id="setting-reset">Reset ALL data</button>
         </div>
+      </div>
     </div>
-</div>
-        
-    <!--Navigation Bar-->
-    <nav class="lightmode">
-        <a href=index.html><img id="logo" src="styles/images/logo/logosmall.png"></a>
-        <p id="navmsg"></p>
-        <ul>
+      <!--Navigation Bar-->
+      <nav class="lightmode">
+          <a href=index.html><img id="logo" src="styles/images/logo/logosmall.png"></a>
+          <p id="navmsg"></p>
+          <ul>
             <li><a href=dashboard.html>Dashboard</a></li>
-            <li ><a style="background-color: #639f60;" href=contribute.html>Contribute</a></li>
+            <li><a style="background-color: #639f60;"href=contribute.html>Contribute</a></li>
             <li><a href=furtherreading.html>Further Reading</a></li>
-        </ul>
-        <a href=#><img src="styles/images/widgets/settings.png"></a>
-    </nav>
+          </ul>
+          <img id="settings"src="styles/images/widgets/settings.png">
+      </nav>
     <p id="welcome" style="background-color: #263d25; padding: 0.5vw;">Looking to offset your emissions or support a charity? Your contribution could a long way.</p>
     <!--Offset Emissions|Support a charity|Volunteer, flexbox columns of 3-->
     <div id="box">

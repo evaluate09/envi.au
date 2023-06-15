@@ -26,6 +26,71 @@ body {
   padding: 1vw;
 }
 
+#overlay {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  display: none;
+  background-color: rgba(0, 0, 0, 0.8);
+  justify-content: center;
+  z-index: 2;
+}
+#overlay div {
+  width: 60%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  background-color: #487545;
+}
+#overlay div div {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 1vw;
+  margin-top: 1vw;
+}
+#overlay div h2 {
+  background-color: #f1f1f1;
+  color: #263d25;
+  width: 100%;
+  text-align: center;
+  padding-top: 1vw;
+  padding-bottom: 1vw;
+  cursor: pointer;
+  font-size: 1vw;
+}
+#overlay div p {
+  word-wrap: break-word;
+  padding: 0;
+  font-size: 1vw;
+}
+#overlay div form {
+  text-align: center;
+  display: flex;
+  justify-content: space-between;
+}
+#overlay div input {
+  padding: 0.8vw;
+  margin-bottom: 1vw;
+  margin-top: 0.3vw;
+  border-style: none;
+  font-size: 1vw;
+}
+#overlay div input[type=select] {
+  display: flex;
+  justify-content: center;
+}
+#overlay div input[type=submit] {
+  width: 4.5vw;
+  padding: 0.8vw;
+}
+#overlay div input[type=submit]:hover {
+  background-color: #b5b5b5;
+}
+
+#settings {
+  cursor: pointer;
+}
+
 #navmsg {
   color: #487545;
 }
@@ -197,9 +262,6 @@ nav ul li a {
 }
 nav ul li a:hover {
   background-color: #b5b5b5;
-}
-nav ul li a:active {
-  background-color: #639f60;
 }
 
 footer {

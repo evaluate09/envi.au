@@ -28,6 +28,7 @@ function timeOfDay(localtime) {
 
 const navmsg = document.getElementById("navmsg");
 //Settings
+
 const settings = document.getElementById("settings")
 const overlay = document.getElementById("overlay")
 const close = document.getElementById("close")
@@ -98,7 +99,6 @@ if (emissions != null) {
 if (loc != null) {
     loc = loc.split(",")
 }
-console.log(emissions,loc)
 navmsg.innerHTML = timeOfDay(getDate()[1]);
 
 if (localStorage.getItem("emissions") === null) {

@@ -74,6 +74,10 @@ body {
   background-color: #b5b5b5;
 }
 
+#settings {
+  cursor: pointer;
+}
+
 #navmsg {
   color: #487545;
 }
@@ -208,7 +212,4 @@ nav ul li a {
 }
 nav ul li a:hover {
   background-color: #b5b5b5;
-}
-nav ul li a:active {
-  background-color: #639f60;
 }/*# sourceMappingURL=main.css.map */

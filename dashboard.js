@@ -130,7 +130,7 @@ function displayNewTask(level) {
 }
 
 async function weatherCall(city) {
-    const response = await fetch(`http://api.weatherapi.com/v1/current.json?key=5d2d973a6fa2456eb1251816232704&q=${city}&aqi=yes`, {
+    const response = await fetch(`https://api.weatherapi.com/v1/current.json?key=5d2d973a6fa2456eb1251816232704&q=${city}&aqi=yes`, {
         method: 'GET',
     });
     if (!response.ok) {

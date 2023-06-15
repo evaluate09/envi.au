@@ -8,17 +8,65 @@
     <link rel="stylesheet" href="styles/dashboard.css">
 </head>
 <body>
-    <!--Navigation Bar-->
-    <nav class="lightmode">
-        <a href=index.html><img id="logo" src="styles/images/logo/logosmall.png"></a>
-        <p id="navmsg"></p>
-        <ul>
-            <li><a style="background-color: #639f60;" href=dashboard.html>Dashboard</a></li>
+    <!--Settings-->
+    <div id="overlay">
+        <div class="settings">
+          <h2 id="close">Close</h2>
+          <h1>Settings</h1>
+          <div>
+            <p style="margin-right: 2.8vw;">Change Username</p>
+            <form id="setting-username-form">
+              <input for = "username" id = "setting-username-input" type="text" maxlength = "15" placeholder = "Your new username" required> <!--The user must enter a username-->
+              <input type="submit" value="Submit">
+            </form>
+          </div>
+        <div>
+          <form id = "setting-state-form" required>
+          <p style="margin-right: 5.15vw;">Change State</p>
+            <select name="states" id="setting-state-input">
+              <option value="Australian Capital Territory">Australian Capital Territory</option>
+              <option value="New South Wales">New South Wales</option>
+              <option value="Northern Territory">Northern Territory</option>
+              <option value="Queensland">Queensland</option>
+              <option value="Southern Australia">Southern Australia</option>
+              <option value="Tasmania">Tasmania</option>
+              <option value="Victoria">Victoria</option>
+              <option value="Western Australia">Western Australia</option>
+            </select>
+            <input type="submit" value="Submit">
+          </form>
+        </div>
+        <div>
+          <form id = "setting-city-form">
+            <p style="margin-right: 7.8vw;">Change City</p>
+            <input for = "username" id = "setting-city-input" type="text" placeholder = "Your city" required> <!--The user must enter a username-->
+            <input type="submit" value="Submit">
+          </form>
+        </div>
+        <div>
+          <form id = "setting-emission-form">
+            <p style="margin-right: 6vw;">Recalculate Emissions</p>
+            <input for = "username" id = "setting-emission-input" type="text" placeholder = "Your annual co2 emissions (tonnes)" required> <!--The user must enter a username-->
+            <input type="submit" value="Submit">
+          </form>
+        </div>
+        <div>
+          <p style="margin-right: 6.8vw;">!!Danger!!</p>
+          <button id="setting-reset">Reset ALL data</button>
+        </div>
+      </div>
+    </div>
+      <!--Navigation Bar-->
+      <nav class="lightmode">
+          <a href=index.html><img id="logo" src="styles/images/logo/logosmall.png"></a>
+          <p id="navmsg"></p>
+          <ul>
+            <li><a style="background-color: #639f60;"href=dashboard.html>Dashboard</a></li>
             <li><a href=contribute.html>Contribute</a></li>
             <li><a href=furtherreading.html>Further Reading</a></li>
-        </ul>
-        <a href=#><img src="styles/images/widgets/settings.png"></a>
-    </nav>
+          </ul>
+          <img id="settings"src="styles/images/widgets/settings.png">
+      </nav>
     <p id="welcome"></p>
     <div id="dashbox">
         <div id="left">

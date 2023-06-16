@@ -224,7 +224,7 @@ function dashboardSequence() {
             } else {
                 localStorage.setItem("city",city)
                 weatherText.innerText = `Temperature: ${calledWeather.current.temp_c}°C | Humidity: ${calledWeather.current.humidity}% | Condition: ${calledWeather.current.condition["text"]}`
-                airqText.innerText = `Air quality: ${airqIndex[Number(calledWeather.current.air_quality["us-epa-index"])]} | Location: ${storedCity}`
+                airqText.innerText = `Air quality: ${airqIndex[Number(calledWeather.current.air_quality["us-epa-index"])]} | Location: ${city}`
                 locationForm.style.display = "none"
             }
             

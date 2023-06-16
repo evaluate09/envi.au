@@ -48,7 +48,7 @@ function timeOfDay(localtime) {
     return `${output[0]} Good ${output[1]}!`;
 };
 function completeForms() {
-    document.getElementById("bodydiv").style.paddingBottom = "20vw"
+    document.getElementsByClassName("bodydiv").style.paddingBottom = "20vw"
     localStorage.setItem("returning", true)
     document.body.style.overflow = "hidden";
     welcome.innerHTML = `Hey, ${localStorage.getItem("username")}!` + "<br><br>" + `You've earned ${localStorage.getItem("points")} points.` + "<br>" 
@@ -151,7 +151,7 @@ locationForm.addEventListener("submit", (e) => {
     stateAverageButton.style.display = "inline-block";
     calcAverageForm.style.display = "flex";
     document.body.style.overflow = "visible";
-    document.getElementById("bodydiv").style.paddingBottom = "2vw"
+    document.getElementsByClassName("bodydiv").style.paddingBottom = "2vw"
 });
 stateAverageButton.addEventListener("click", () => {
     localStorage.setItem("emissionsAverage",stateAverages[localStorage.getItem("state")])

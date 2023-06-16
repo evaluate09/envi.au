@@ -46,7 +46,7 @@
       <div>
         <form id = "setting-emission-form">
           <p style="margin-right: 6vw;">Recalculate Emissions</p>
-          <input for = "username" id = "setting-emission-input" type="text" placeholder = "Your annual co2 emissions (tonnes)" required> <!--The user must enter a username-->
+          <input for = "username" id = "setting-emission-input" type="number" placeholder = "Your annual co2 emissions (tonnes)" required> <!--The user must enter a username-->
           <input type="submit" value="Submit">
         </form>
       </div>
@@ -69,7 +69,7 @@
     </nav>
     <!--Home Page Body-->
     <div class="centerflex">
-      <div class="bodydiv">
+      <div id="bodydiv">
         <h1>Environmental Awareness Australia.</h1>
         <p id="welcome"></p>
         <!--Username Form-->
@@ -100,7 +100,7 @@
           <input type="submit" value="Submit">
         </form>
         <br>
-        <iframe class="hidden" id="external-calc" width="100%" height="100%" frameborder="0" marginwidth="0" marginheight="0" src="https://calculator.carbonfootprint.com/calculator.aspx"></iframe>
+        <iframe class="hidden" id="external-calc" width="100%" height="500vh" frameborder="0" marginwidth="0" marginheight="0" src="https://calculator.carbonfootprint.com/calculator.aspx"></iframe>
     </div>
   </div>
     

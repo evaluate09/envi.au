@@ -32,7 +32,15 @@ navmsg.innerHTML = timeOfDay(getDate()[1]);
 const settings = document.getElementById("settings")
 const overlay = document.getElementById("overlay")
 const close = document.getElementById("close")
-
+const stateAverages = { //average annual CO2 emissions per person by state in tonnes (AUS)
+    "Australian Capital Territory": 3.2,
+    "Northern Territory": 66.9,
+    "New South Wales": 16.7,
+    "Queensland": 25.1,
+    "Southern Australia": 12.8,
+    "Tasmania": 1.67,
+    "Victoria": 17.4,
+    "Western Australia": 34.4}
 //setting if player is not returning change the settings so that it says "please make a user profile first on the home page"
 settings.addEventListener("click", ()=> {
     overlay.style.display = "flex";
@@ -40,53 +48,46 @@ settings.addEventListener("click", ()=> {
         e.preventDefault()
         localStorage.setItem("username", document.getElementById("setting-username-input").value)
         e.target.reset()
+        location.reload();
     })
     document.getElementById("setting-state-form").addEventListener("submit", (e) => {
         e.stopImmediatePropagation()
-        let location = localStorage.getItem('location').split()
-        let emissions = localStorage.getItem('emissions').split()
-        localStorage.setItem("location", [document.getElementById("setting-state-input").value,location[1]])
-        localStorage.setItem("emissions",[stateAverages[document.getElementById("setting-state-input").value],emissions[1]])
+        let state = document.getElementById("setting-state-input").value
+        localStorage.setItem("state",state)
+        localStorage.setItem("emissionsAverage",stateAverages[state])
         e.target.reset()
+        location.reload();
         //use state vs calculated
     })
     document.getElementById("setting-city-form").addEventListener("submit", (e) => {
         e.preventDefault()
-        let location = localStorage.getItem('location').split()
-        localStorage.setItem("location", [location[0],document.getElementById("setting-city-input").value])
+        let city = document.getElementById("setting-city-input").value
+        localStorage.setItem("city",city)
         e.target.reset()
+        location.reload();
         
     })
     document.getElementById("setting-emission-form").addEventListener("submit", (e) => {
         e.preventDefault()
-        let emissions = localStorage.getItem('emissions').split()
-        localStorage.setItem("emissions",[emissions[0],stateAverages[document.getElementById("setting-emission-input").value]])
+        let emissions = document.getElementById("setting-emission-input").value
+        localStorage.setItem("emissionsCalculated",emissions)
         e.target.reset()
-        //use state vs calculated
-    })
-    document.getElementById("setting-emission-form").addEventListener("submit", (e) => {
-        e.preventDefault()
-        let emissions = localStorage.getItem('emissions').split()
-        localStorage.setItem("emissions",[emissions[0],stateAverages[document.getElementById("setting-emission-input").value]])
-        e.target.reset()
-        //use state vs calculated
+        location.reload();
     })
     document.getElementById("setting-reset").addEventListener("click", () => {
         if (confirm("Are you sure you want to wipe your data?")) {
             localStorage.clear();
             location.reload();
         }
-        //use state vs calculated
     })
-        //use state vs calculated
 })
 close.addEventListener("click", ()=> {
-    overlay.style.display = "none";
+overlay.style.display = "none";
 })
 document.addEventListener("keydown", (e)=>{
-    if (e.key === "Escape") {
-        if (overlay.style.display == "flex") {
-            overlay.style.display = "none"
-        }
+if (e.key === "Escape") {
+    if (overlay.style.display == "flex") {
+        overlay.style.display = "none"
     }
+}
 })

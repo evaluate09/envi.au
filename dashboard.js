@@ -38,6 +38,15 @@ const tasks = {
         
     }
 }
+const stateAverages = { //average annual CO2 emissions per person by state in tonnes (AUS)
+    "Australian Capital Territory": 3.2,
+    "Northern Territory": 66.9,
+    "New South Wales": 16.7,
+    "Queensland": 25.1,
+    "Southern Australia": 12.8,
+    "Tasmania": 1.67,
+    "Victoria": 17.4,
+    "Western Australia": 34.4}
 //-------------FUNCTIONS-------------
 //Returns date and time as an array
 function getDate() {
@@ -185,14 +194,15 @@ function dashboardSequence() {
     const locationInput = document.getElementById("location-input")
     const weatherText = document.getElementById("weather")
     const airqText = document.getElementById("airquality")
-    let storedLocation = localStorage.getItem("location").split(',')
-    let emissions = localStorage.getItem("emissions").split(',')
+    const storedCity = localStorage.getItem("city")
+    const emissionsAverage = localStorage.getItem("emissionsAverage")
+    const emissionsCalculated = localStorage.getItem("emissionsCalculated")
 
-    if (emissions[0] == '') { //if not estimated
-        document.getElementById("predicted").innerText = `Your annual CO2 emissions are ${emissions[1]}`
-    } else { //if estimated
-        document.getElementById("predicted").innerText = `Your estimated annual CO2 emissions are ${emissions[0]} tonnes.`
 
+    if (emissionsCalculated === null) { //if the state average is used
+        document.getElementById("predicted").innerText = `Your annual CO2 emissions are ${emissionsAverage} tonnes`
+    } else {  //if the accurate calculation has been provided
+        document.getElementById("predicted").innerText = `Your estimated annual CO2 emissions are ${emissionsCalculated} tonnes.`
     }
     const airqIndex = {
         1 : "Good",
@@ -202,7 +212,7 @@ function dashboardSequence() {
         5 : "Very unhealthy",
         6 : "Hazardous"
     }
-    if (storedLocation.length == 1) { //if there is no city inputted
+    if (storedCity === null) { //if there is no city inputted
         locationForm.style.display = "inline"
         locationForm.addEventListener("submit", (e) => {
             e.preventDefault()
@@ -212,24 +222,22 @@ function dashboardSequence() {
             if (calledWeather.length == 1) {
                 weatherText.innerText = calledWeather[0]
             } else {
-                storedLocation.push(city)
-                localStorage.setItem("location",storedLocation)
+                localStorage.setItem("city",city)
                 weatherText.innerText = `Temperature: ${calledWeather.current.temp_c}°C | Humidity: ${calledWeather.current.humidity}% | Condition: ${calledWeather.current.condition["text"]}`
-                airqText.innerText = `Air quality: ${airqIndex[Number(calledWeather.current.air_quality["us-epa-index"])]} | Location: ${storedLocation[1]}`
+                airqText.innerText = `Air quality: ${airqIndex[Number(calledWeather.current.air_quality["us-epa-index"])]} | Location: ${storedCity}`
                 locationForm.style.display = "none"
             }
             
         })()
-
     }) 
-    }   else if (storedLocation.length == 2) {
+    }   else {
             (async () => {
-                let calledWeather = await weatherCall(storedLocation[1]) //[temperature (celsius), air quality]
+                let calledWeather = await weatherCall(storedCity) //[temperature (celsius), air quality]
                 if (calledWeather.length == 1) {
                     weatherText.innerText = calledWeather[0]
                 } else {
                     weatherText.innerText = `Temperature: ${calledWeather.current.temp_c}°C | Humidity: ${calledWeather.current.humidity}% | Condition: ${calledWeather.current.condition["text"]}`
-                    airqText.innerText = `Air quality: ${airqIndex[Number(calledWeather.current.air_quality["us-epa-index"])]} | Location: ${storedLocation[1]}`
+                    airqText.innerText = `Air quality: ${airqIndex[Number(calledWeather.current.air_quality["us-epa-index"])]} | Location: ${storedCity}`
                     locationForm.style.display = "none"
                 }
                 
@@ -247,63 +255,55 @@ navmsg.innerHTML = timeOfDay(getDate()[1]);
 const settings = document.getElementById("settings")
 const overlay = document.getElementById("overlay")
 const close = document.getElementById("close")
-
 //setting if player is not returning change the settings so that it says "please make a user profile first on the home page"
-    settings.addEventListener("click", ()=> {
-        overlay.style.display = "flex";
-        document.getElementById("setting-username-form").addEventListener("submit", (e) => {
-            e.preventDefault()
-            localStorage.setItem("username", document.getElementById("setting-username-input").value)
-            e.target.reset()
-        })
-        document.getElementById("setting-state-form").addEventListener("submit", (e) => {
-            e.stopImmediatePropagation()
-            let location = localStorage.getItem('location').split()
-            let emissions = localStorage.getItem('emissions').split()
-            localStorage.setItem("location", [document.getElementById("setting-state-input").value,location[1]])
-            localStorage.setItem("emissions",[stateAverages[document.getElementById("setting-state-input").value],emissions[1]])
-            e.target.reset()
-            //use state vs calculated
-        })
-        document.getElementById("setting-city-form").addEventListener("submit", (e) => {
-            e.preventDefault()
-            let location = localStorage.getItem('location').split()
-            localStorage.setItem("location", [location[0],document.getElementById("setting-city-input").value])
-            e.target.reset()
-            
-        })
-        document.getElementById("setting-emission-form").addEventListener("submit", (e) => {
-            e.preventDefault()
-            let emissions = localStorage.getItem('emissions').split()
-            localStorage.setItem("emissions",[emissions[0],stateAverages[document.getElementById("setting-emission-input").value]])
-            e.target.reset()
-            //use state vs calculated
-        })
-        document.getElementById("setting-emission-form").addEventListener("submit", (e) => {
-            e.preventDefault()
-            let emissions = localStorage.getItem('emissions').split()
-            localStorage.setItem("emissions",[emissions[0],stateAverages[document.getElementById("setting-emission-input").value]])
-            e.target.reset()
-            //use state vs calculated
-        })
-        document.getElementById("setting-reset").addEventListener("click", () => {
-            if (confirm("Are you sure you want to wipe your data?")) {
-                localStorage.clear();
-                location.reload();
-            }
-            //use state vs calculated
-        })
+settings.addEventListener("click", ()=> {
+    overlay.style.display = "flex";
+    document.getElementById("setting-username-form").addEventListener("submit", (e) => {
+        e.preventDefault()
+        localStorage.setItem("username", document.getElementById("setting-username-input").value)
+        e.target.reset()
+        location.reload();
+    })
+    document.getElementById("setting-state-form").addEventListener("submit", (e) => {
+        e.stopImmediatePropagation()
+        let state = document.getElementById("setting-state-input").value
+        localStorage.setItem("state",state)
+        localStorage.setItem("emissionsAverage",stateAverages[state])
+        e.target.reset()
+        location.reload();
         //use state vs calculated
+    })
+    document.getElementById("setting-city-form").addEventListener("submit", (e) => {
+        e.preventDefault()
+        let city = document.getElementById("setting-city-input").value
+        localStorage.setItem("city",city)
+        e.target.reset()
+        location.reload();
+        
+    })
+    document.getElementById("setting-emission-form").addEventListener("submit", (e) => {
+        e.preventDefault()
+        let emissions = document.getElementById("setting-emission-input").value
+        localStorage.setItem("emissionsCalculated",emissions)
+        e.target.reset()
+        location.reload();
+    })
+    document.getElementById("setting-reset").addEventListener("click", () => {
+        if (confirm("Are you sure you want to wipe your data?")) {
+            localStorage.clear();
+            location.reload();
+        }
+    })
 })
 close.addEventListener("click", ()=> {
-    overlay.style.display = "none";
+overlay.style.display = "none";
 })
 document.addEventListener("keydown", (e)=>{
-    if (e.key === "Escape") {
-        if (overlay.style.display == "flex") {
-            overlay.style.display = "none"
-        }
+if (e.key === "Escape") {
+    if (overlay.style.display == "flex") {
+        overlay.style.display = "none"
     }
+}
 })
 
 if (localStorage.getItem("returning")) {

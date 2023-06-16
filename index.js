@@ -48,6 +48,9 @@ function timeOfDay(localtime) {
     return `${output[0]} Good ${output[1]}!`;
 };
 function completeForms() {
+    document.getElementById("bodydiv").style.paddingBottom = "20vw"
+    localStorage.setItem("returning", true)
+    document.body.style.overflow = "hidden";
     welcome.innerHTML = `Hey, ${localStorage.getItem("username")}!` + "<br><br>" + `You've earned ${localStorage.getItem("points")} points.` + "<br>" 
     welcome2.innerHTML =  "Use the navigation bar to go to your dashboard and complete tasks to get more points!";
     externalCalculator.style.display = "none";
@@ -82,45 +85,38 @@ settings.addEventListener("click", ()=> {
             e.preventDefault()
             localStorage.setItem("username", document.getElementById("setting-username-input").value)
             e.target.reset()
+            location.reload();
         })
         document.getElementById("setting-state-form").addEventListener("submit", (e) => {
             e.stopImmediatePropagation()
-            let location = localStorage.getItem('location').split()
-            let emissions = localStorage.getItem('emissions').split()
-            localStorage.setItem("location", [document.getElementById("setting-state-input").value,location[1]])
-            localStorage.setItem("emissions",[stateAverages[document.getElementById("setting-state-input").value],emissions[1]])
+            let state = document.getElementById("setting-state-input").value
+            localStorage.setItem("state",state)
+            localStorage.setItem("emissionsAverage",stateAverages[state])
             e.target.reset()
+            location.reload();
             //use state vs calculated
         })
         document.getElementById("setting-city-form").addEventListener("submit", (e) => {
             e.preventDefault()
-            let location = localStorage.getItem('location').split()
-            localStorage.setItem("location", [location[0],document.getElementById("setting-city-input").value])
+            let city = document.getElementById("setting-city-input").value
+            localStorage.setItem("city",city)
             e.target.reset()
+            location.reload();
             
         })
         document.getElementById("setting-emission-form").addEventListener("submit", (e) => {
             e.preventDefault()
-            let emissions = localStorage.getItem('emissions').split()
-            localStorage.setItem("emissions",[emissions[0],stateAverages[document.getElementById("setting-emission-input").value]])
+            let emissions = document.getElementById("setting-emission-input").value
+            localStorage.setItem("emissionsCalculated",emissions)
             e.target.reset()
-            //use state vs calculated
-        })
-        document.getElementById("setting-emission-form").addEventListener("submit", (e) => {
-            e.preventDefault()
-            let emissions = localStorage.getItem('emissions').split()
-            localStorage.setItem("emissions",[emissions[0],stateAverages[document.getElementById("setting-emission-input").value]])
-            e.target.reset()
-            //use state vs calculated
+            location.reload();
         })
         document.getElementById("setting-reset").addEventListener("click", () => {
             if (confirm("Are you sure you want to wipe your data?")) {
                 localStorage.clear();
                 location.reload();
             }
-            //use state vs calculated
         })
-        //use state vs calculated
 })
 close.addEventListener("click", ()=> {
     overlay.style.display = "none";
@@ -138,7 +134,6 @@ usernameEstablished();
 usernameForm.addEventListener("submit", (e) => {
     e.preventDefault();
     localStorage.setItem("username", usernameInput.value);
-    localStorage.setItem("returning", true)
     localStorage.setItem("points",0)
     localStorage.setItem("taskstore",[getDate()[0]])
     e.target.reset()
@@ -148,21 +143,23 @@ usernameForm.addEventListener("submit", (e) => {
   });
 locationForm.addEventListener("submit", (e) => {
     e.preventDefault();
-    localStorage.setItem("location", locationInput.value);
+    localStorage.setItem("state", locationInput.value);
     welcome.innerHTML = "Finally, let's calculate your carbon footprint." + "<br>" +"You can use your state's average.";
     welcome2.innerHTML = "Or you can calculate it below and enter the number you got in tonnes.";
     locationForm.style.display = "none";
     externalCalculator.style.display = "inline-block";
     stateAverageButton.style.display = "inline-block";
     calcAverageForm.style.display = "flex";
+    document.body.style.overflow = "visible";
+    document.getElementById("bodydiv").style.paddingBottom = "2vw"
 });
 stateAverageButton.addEventListener("click", () => {
-    localStorage.setItem("emissions",[stateAverages[localStorage.getItem("location")],""])
+    localStorage.setItem("emissionsAverage",stateAverages[localStorage.getItem("state")])
     completeForms();
 });
 calcAverageForm.addEventListener("submit", (e) => {
     e.preventDefault();
-    localStorage.setItem("emissions", ["",calcAverageInput.value]); 
+    localStorage.setItem("emissionsCalculated", calcAverageInput.value); 
     completeForms();
 });
 

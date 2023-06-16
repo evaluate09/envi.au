@@ -155,7 +155,7 @@ input[type=submit]:hover {
   align-items: center;
 }
 
-.bodydiv {
+#bodydiv {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -163,7 +163,7 @@ input[type=submit]:hover {
   padding-bottom: 100vw;
   background-color: #487545;
 }
-.bodydiv h1 {
+#bodydiv h1 {
   color: #f1f1f1;
   font-size: 3vw;
   margin: 0;
@@ -171,12 +171,12 @@ input[type=submit]:hover {
   padding-left: 10vw;
   padding-right: 10vw;
 }
-.bodydiv h2 {
+#bodydiv h2 {
   color: #b5b5b5;
   font-size: 1.5vw;
   margin: 2vw;
 }
-.bodydiv p {
+#bodydiv p {
   padding-top: 2vw;
   color: #f1f1f1;
   font-size: 1.5vw;

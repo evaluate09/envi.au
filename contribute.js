@@ -1,3 +1,19 @@
+//-------------CONSTANTS-------------
+const navmsg = document.getElementById("navmsg");
+const settings = document.getElementById("settings")
+const overlay = document.getElementById("overlay")
+const close = document.getElementById("close")
+const stateAverages = { //average annual CO2 emissions per person by state in tonnes (AUS)
+    "Australian Capital Territory": 3.2,
+    "Northern Territory": 66.9,
+    "New South Wales": 16.7,
+    "Queensland": 25.1,
+    "Southern Australia": 12.8,
+    "Tasmania": 1.67,
+    "Victoria": 17.4,
+    "Western Australia": 34.4}
+const offset = document.getElementById("offsetText");
+//-------------FUNCTIONS-------------
 function getDate() {
     let date = new Date();
     let day = date.toLocaleDateString();
@@ -26,75 +42,7 @@ function timeOfDay(localtime) {
     return `${output[0]} Good ${output[1]}!`;
 };
 
-const navmsg = document.getElementById("navmsg");
-//Settings
-
-const settings = document.getElementById("settings")
-const overlay = document.getElementById("overlay")
-const close = document.getElementById("close")
-const stateAverages = { //average annual CO2 emissions per person by state in tonnes (AUS)
-    "Australian Capital Territory": 3.2,
-    "Northern Territory": 66.9,
-    "New South Wales": 16.7,
-    "Queensland": 25.1,
-    "Southern Australia": 12.8,
-    "Tasmania": 1.67,
-    "Victoria": 17.4,
-    "Western Australia": 34.4}
-//setting if player is not returning change the settings so that it says "please make a user profile first on the home page"
-settings.addEventListener("click", ()=> {
-    overlay.style.display = "flex";
-    document.getElementById("setting-username-form").addEventListener("submit", (e) => {
-        e.preventDefault()
-        localStorage.setItem("username", document.getElementById("setting-username-input").value)
-        e.target.reset()
-        location.reload();
-    })
-    document.getElementById("setting-state-form").addEventListener("submit", (e) => {
-        e.stopImmediatePropagation()
-        let state = document.getElementById("setting-state-input").value
-        localStorage.setItem("state",state)
-        localStorage.setItem("emissionsAverage",stateAverages[state])
-        e.target.reset()
-        location.reload();
-        //use state vs calculated
-    })
-    document.getElementById("setting-city-form").addEventListener("submit", (e) => {
-        e.preventDefault()
-        let city = document.getElementById("setting-city-input").value
-        localStorage.setItem("city",city)
-        e.target.reset()
-        location.reload();
-        
-    })
-    document.getElementById("setting-emission-form").addEventListener("submit", (e) => {
-        e.preventDefault()
-        let emissions = document.getElementById("setting-emission-input").value
-        localStorage.setItem("emissionsCalculated",emissions)
-        e.target.reset()
-        location.reload();
-    })
-    document.getElementById("setting-reset").addEventListener("click", () => {
-        if (confirm("Are you sure you want to wipe your data?")) {
-            localStorage.clear();
-            location.reload();
-        }
-    })
-})
-close.addEventListener("click", ()=> {
-overlay.style.display = "none";
-})
-document.addEventListener("keydown", (e)=>{
-if (e.key === "Escape") {
-    if (overlay.style.display == "flex") {
-        overlay.style.display = "none"
-    }
-}
-})
-const offset = document.getElementById("offsetText");
-
-navmsg.innerHTML = timeOfDay(getDate()[1]);
-
+//-------------MAIN SEQUENCE-------------
 if (localStorage.getItem("emissionsAverage") === null && localStorage.getItem("emissionsCalculated") === null) {
     offset.innerText = "You haven't calculated your emissions yet. Click the plant icon and fill in the forms to do so!"
 } else if (localStorage.getItem("emissionsCalculated") === null){
@@ -102,3 +50,55 @@ if (localStorage.getItem("emissionsAverage") === null && localStorage.getItem("e
 } else {
     offset.innerText = `Your predicted CO2 emissions are ${localStorage.getItem("emissionsCalculated")} tonnes per year.`
 }
+//-------------NAVIGATION BAR-------------
+navmsg.innerHTML = timeOfDay(getDate()[1]);
+
+//-------------SETTINGS-------------
+settings.addEventListener("click", ()=> { //Change username
+    overlay.style.display = "flex";
+    document.getElementById("setting-username-form").addEventListener("submit", (e) => {
+        e.preventDefault()
+        localStorage.setItem("username", document.getElementById("setting-username-input").value)
+        e.target.reset()
+        location.reload();
+    })
+    document.getElementById("setting-state-form").addEventListener("submit", (e) => { //Change state
+        e.stopImmediatePropagation()
+        let state = document.getElementById("setting-state-input").value
+        localStorage.setItem("state",state)
+        localStorage.setItem("emissionsAverage",stateAverages[state])
+        e.target.reset()
+        location.reload();
+    })
+    document.getElementById("setting-city-form").addEventListener("submit", (e) => { //Change city
+        e.preventDefault()
+        let city = document.getElementById("setting-city-input").value
+        localStorage.setItem("city",city)
+        e.target.reset()
+        location.reload();
+        
+    })
+    document.getElementById("setting-emission-form").addEventListener("submit", (e) => { //Change calculated emissions amount
+        e.preventDefault()
+        let emissions = document.getElementById("setting-emission-input").value
+        localStorage.setItem("emissionsCalculated",emissions)
+        e.target.reset()
+        location.reload();
+    })
+    document.getElementById("setting-reset").addEventListener("click", () => { //Wipe all data
+        if (confirm("Are you sure you want to wipe your data?")) {
+            localStorage.clear();
+            location.reload();
+        }
+    })
+})
+close.addEventListener("click", ()=> { //leave settings
+overlay.style.display = "none";
+})
+document.addEventListener("keydown", (e)=>{ //Leave settings
+if (e.key === "Escape") {
+    if (overlay.style.display == "flex") {
+        overlay.style.display = "none"
+    }
+}
+})
